@@ -1,0 +1,323 @@
+/* ========================================
+   VENTAS.CSS - PÁGINA DE PRODUCTOS
+   ======================================== */
+
+/* ================= RESET Y VARIABLES ================= */
+:root {
+    --granate: #8B2C2C;
+    --naranja: #F4911E;
+    --blanco: #ffffff;
+    --gris: #f5f5f5;
+    --sombra: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* ================= SECCIÓN PRINCIPAL ================= */
+.audifonos-section {
+    padding: 120px 0 60px;
+    background: #fafafa;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    color: var(--granate);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ================= GRID ================= */
+.audifonos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ================= TARJETA ================= */
+.audifono-card {
+    background: var(--blanco);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.audifono-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(139, 44, 44, 0.15);
+}
+
+/* ================= IMAGEN ================= */
+.audifono-img {
+    background: var(--gris);
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    border-bottom: 2px solid var(--naranja);
+}
+
+.audifono-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.audifono-card:hover .audifono-img img {
+    transform: scale(1.05);
+}
+
+/* ================= CUERPO ================= */
+.audifono-body {
+    padding: 22px 20px 25px;
+    text-align: center;
+}
+
+.audifono-body h3 {
+    color: var(--granate);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.audifono-body p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    min-height: 45px;
+}
+
+/* ================= TAGS ================= */
+.audifono-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.audifono-tags span {
+    background: linear-gradient(135deg, rgba(139,44,44,0.1), rgba(244,145,30,0.1));
+    color: var(--granate);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(139,44,44,0.15);
+}
+
+/* ================= PRECIO ================= */
+.audifono-precio {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--granate);
+    margin-bottom: 18px;
+    padding: 10px;
+    background: rgba(244,145,30,0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--naranja);
+}
+
+/* ================= BOTÓN ================= */
+.btn-ver {
+    background: linear-gradient(135deg, var(--granate), var(--naranja));
+    color: var(--blanco);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-ver:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139,44,44,0.3);
+}
+
+/* ================= CTA ================= */
+.cta-section {
+    background: linear-gradient(135deg, var(--granate), var(--naranja));
+    padding: 70px 20px;
+    text-align: center;
+    color: var(--blanco);
+}
+
+.cta-section h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-cta-whatsapp {
+    background: var(--blanco);
+    color: var(--granate);
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--blanco);
+}
+
+.btn-cta-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    color: var(--granate);
+}
+
+.btn-cta-secundario {
+    background: transparent;
+    color: var(--blanco);
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--blanco);
+}
+
+.btn-cta-secundario:hover {
+    background: var(--blanco);
+    color: var(--granate);
+    transform: translateY(-3px);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: #222;
+    color: #ccc;
+    padding: 50px 20px 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer h4 {
+    color: var(--naranja);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+footer p {
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: var(--naranja);
+    color: var(--blanco);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background: var(--granate);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .audifonos-section {
+        padding: 100px 0 40px;
+    }
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    .audifonos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .cta-section h2 {
+        font-size: 1.6rem;
+    }
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-cta-whatsapp,
+    .btn-cta-secundario {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .audifonos-grid {
+        grid-template-columns: 1fr;
+    }
+    .audifono-body h3 {
+        font-size: 1.1rem;
+    }
+    .audifono-precio {
+        font-size: 1.5rem;
+    }
+}
