@@ -77,108 +77,231 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./css/style.css">
 
     <style>
+        :root {
+            --bg-soft: #efefef;
+            --panel-bg: rgba(255, 255, 255, 0.7);
+            --line: #d8d5d1;
+            --text: #242424;
+            --muted: #666666;
+            --accent: #d46d42;
+            --accent-dark: #b8582e;
+            --black: #1d1d1d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #001f3f 0%, #003366 50%, #0056b3 100%);
+            background: var(--bg-soft);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "MED";
+            position: absolute;
+            right: 10%;
+            bottom: 18%;
+            font-size: clamp(65px, 9vw, 170px);
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            color: rgba(191, 181, 173, 0.22);
+            pointer-events: none;
+            user-select: none;
         }
 
         .login-card {
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.52);
+            border: 1px solid rgba(255,255,255,0.65);
+            border-radius: 28px;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 420px;
-            padding: 40px 35px;
+            max-width: 520px;
+            padding: 24px 38px 30px;
             text-align: center;
             position: relative;
+            z-index: 1;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            margin: 0 0 18px;
+            flex-wrap: nowrap;
+            width: 100%;
         }
 
         .logo-box {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #003366, #0056b3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 32px;
-            color: #ffffff;
-            box-shadow: 0 8px 20px rgba(0, 51, 102, 0.3);
-            border: 3px solid #ffc107;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            transform: rotate(-15deg);
+            margin-left: -10px;
+        }
+
+        .logo-box::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #f9ac3d 0%, #f39b2d 100%);
+            clip-path: polygon(50% 15%, 78% 22%, 100% 50%, 78% 78%, 62% 100%, 50% 100%, 38% 100%, 22% 78%, 0 50%, 22% 22%, 38% 0%, 50% 0%);
+            border-radius: 8px;
+        }
+
+        .logo-box::after {
+            content: "";
+            position: absolute;
+            inset: 24px 22px 22px 22px;
+            background: rgba(255,255,255,0.82);
+            clip-path: polygon(50% 20%, 75% 28%, 90% 50%, 75% 72%, 50% 80%, 25% 72%, 10% 50%, 25% 28%);
+            transform: rotate(8deg);
+        }
+
+        .brand-name {
+            font-size: clamp(3.5rem, 6vw, 7.2rem);
+            line-height: 0.82;
+            letter-spacing: -0.09em;
+            color: #7d2a2a;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 0.02em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            white-space: nowrap;
+        }
+
+        .brand-med {
+            font-size: 0.36em;
+            font-weight: 700;
+            letter-spacing: -0.06em;
+            margin-bottom: 0.18em;
+            color: #7d2a2a;
         }
 
         h1 {
-            font-size: 26px;
-            color: #003366;
-            margin-bottom: 4px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            display: none;
         }
 
         .subtitulo {
-            font-size: 14px;
-            color: #64748b !important;
-            margin-bottom: 25px;
-            font-weight: 500;
+            font-size: 18px;
+            color: #5a5a5a !important;
+            margin-bottom: 22px;
+            font-weight: 400;
+        }
+
+        form {
+            margin-top: 12px;
         }
 
         .form-group {
             margin-bottom: 20px;
             text-align: left;
+            position: relative;
         }
 
         .form-group label {
-            font-size: 13.5px;
-            color: #334155 !important;
-            margin-bottom: 6px;
+            font-size: 18px;
+            color: #4a4a4a !important;
+            margin-bottom: 12px;
             display: block;
-            font-weight: 600;
+            font-weight: 400;
         }
 
-        .form-group label i {
-            margin-right: 6px;
-            color: #0056b3;
-            width: 16px;
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrap i {
+            position: absolute;
+            left: 12px;
+            color: #8d8d8d;
+            font-size: 18px;
+            z-index: 1;
         }
 
         .form-control {
             width: 100%;
-            height: 46px;
-            padding: 10px 14px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 14.5px;
-            color: #1e293b;
-            background-color: #f8fafc;
+            height: 48px;
+            padding: 12px 14px 12px 40px;
+            border: none;
+            border-bottom: 2px solid var(--line);
+            border-radius: 0;
+            font-size: 16px;
+            color: var(--text);
+            background: transparent;
             transition: all 0.25s ease;
+            box-shadow: none;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: #0056b3;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3.5px rgba(0, 86, 179, 0.15);
+            border-bottom-color: #7b7b7b;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        .form-control::placeholder {
+            color: transparent;
+        }
+
+        .extra-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 6px 0 28px;
+            gap: 12px;
+            font-size: 16px;
+            color: #4b4b4b;
+        }
+
+        .remember-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .remember-box input {
+            width: 18px;
+            height: 18px;
+            accent-color: #222;
+        }
+
+        .forgot-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-link:hover {
+            color: var(--accent-dark);
+            text-decoration: none;
         }
 
         .btn-login-submit {
-            background: linear-gradient(135deg, #0056b3 0%, #003366 100%);
+            background: var(--black);
             color: #ffffff !important;
             width: 100%;
-            padding: 13px;
+            padding: 18px 12px;
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 14px;
+            font-size: 20px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
-            margin-top: 10px;
-            box-shadow: 0 6px 18px rgba(0, 51, 102, 0.25);
+            box-shadow: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -186,34 +309,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .btn-login-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.35);
-            background: linear-gradient(135deg, #004494 0%, #002244 100%);
+            background: #000000;
+            transform: translateY(-1px);
             color: #ffffff;
         }
 
-        .btn-volver-sitio {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 10px;
-            margin-top: 12px;
-            background: #f1f5f9;
-            color: #475569 !important;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 13.5px;
-            font-weight: 600;
-            text-decoration: none !important;
-            transition: all 0.2s ease;
+        .register-text {
+            margin-top: 22px;
+            font-size: 16px;
+            color: #4d4d4d;
+            text-align: center;
         }
 
-        .btn-volver-sitio:hover {
-            background: #e2e8f0;
-            color: #1e293b !important;
-            transform: translateY(-1px);
+        .register-text a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-text a:hover {
+            color: var(--accent-dark);
+            text-decoration: none;
         }
 
         .alert-error {
@@ -221,8 +337,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             border-left: 4px solid #ef4444;
             padding: 12px 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 13.5px;
+            margin-bottom: 18px;
+            font-size: 14px;
             color: #991b1b;
             text-align: left;
             display: flex;
@@ -231,23 +347,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .login-footer {
-            margin-top: 25px;
+            margin-top: 22px;
             font-size: 12px;
-            color: #94a3b8 !important;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 16px;
+            color: rgba(90, 90, 90, 0.75) !important;
+            border-top: 1px solid rgba(0,0,0,0.07);
+            padding-top: 14px;
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 24px 22px 28px;
+            }
+
+            .logo-box {
+                width: 120px;
+                height: 120px;
+            }
+
+            .extra-row {
+                font-size: 14px;
+            }
+
+            .btn-login-submit {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="login-card">
-    <div class="logo-box">
-        <i class="fas fa-deaf"></i>
+    <div class="brand-wrap">
+        <div class="logo-box" aria-label="Logo AureaMed"></div>
+        <div class="brand-name" aria-label="AUREA MED">
+            <span>AUREA</span>
+            <span class="brand-med">MED</span>
+        </div>
     </div>
-   
-    <h1>AureaMed</h1>
-    <div class="subtitulo">Panel de Control y Gestión Clínica</div>
+
+    <div class="subtitulo">Panel de Control</div>
     
     <?php if($error != ''): ?>
         <div class="alert-error">
@@ -258,21 +397,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <div class="form-group">
-            <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
-            <input type="text" id="usuario" class="form-control" name="usuario" placeholder="Ingresa tu usuario" required autocomplete="username" autofocus>
+            <label for="usuario">Usuario</label>
+            <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" id="usuario" class="form-control" name="usuario" placeholder="Usuario" required autocomplete="username" autofocus>
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="clave"><i class="fas fa-lock"></i> Contraseña</label>
-            <input type="password" id="clave" class="form-control" name="clave" placeholder="••••••••" required autocomplete="current-password">
+            <label for="clave">Contraseña</label>
+            <div class="input-wrap">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="clave" class="form-control" name="clave" placeholder="Contraseña" required autocomplete="current-password">
+            </div>
         </div>
+
+        <div class="extra-row">
+            <label class="remember-box">
+                <input type="checkbox" name="remember">
+                <span>Recordarme</span>
+            </label>
+            <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        </div>
+
         <button type="submit" class="btn-login-submit">
-            <i class="fas fa-sign-in-alt"></i> INGRESAR AL SISTEMA
+            Iniciar sesión
         </button>
     </form>
 
-    <a href="../aurea--main/docs/index.php" class="btn-volver-sitio">
-        <i class="fas fa-arrow-left"></i> Volver al Sitio Web Principal
-    </a>
+    <div class="register-text">
+        ¿No tienes cuenta? <a href="../aurea--main/docs/index.php">Contáctanos</a>
+    </div>
 
     <div class="login-footer">
         Centro Auditivo AureaMed &bull; Sistema Seguro

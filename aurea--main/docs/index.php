@@ -19,9 +19,10 @@
 <!-- ================= NAVBAR - MENU PRINCIPAL ================= -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-       <a class="aurea2" href="./index.php">
-    <img src="./ia.png" alt="Logo Aurea">Logo aurea</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+       <a class="aurea2" href="./index.php" aria-label="Logo Aurea">
+           <img src="./Asset%2010@4x.png" alt="Logo Aurea">
+       </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown",
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -428,6 +429,7 @@
 
 <!-- ================= RESERVA DE CITAS ================= -->
 <section id="reservar" class="reserva-section">
+
   <div class="reserva-bg">
     <div class="reserva-card">
       
@@ -451,20 +453,27 @@
           
           <div class="reserva-grid">
             <div class="input-grupo">
+              <label class="campo-label" for="nombre">Nombre completo <span aria-hidden="true">*</span></label>
               <i class="fas fa-user"></i>
-              <input type="text" name="nombre" placeholder="Nombre completo" required>
+              <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" autocomplete="name" aria-describedby="error-nombre" required>
+              <small id="error-nombre" class="campo-error" role="alert"></small>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="email">Correo electrónico <span aria-hidden="true">*</span></label>
               <i class="fas fa-envelope"></i>
-              <input type="email" name="email" placeholder="Correo electrónico" required>
+              <input type="email" id="email" name="email" placeholder="Escribe tu correo electrónico" autocomplete="email" aria-describedby="error-email" required>
+              <small id="error-email" class="campo-error" role="alert"></small>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="telefono">Teléfono / WhatsApp</label>
               <i class="fas fa-phone-alt"></i>
-              <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp">
+              <input type="tel" id="telefono" name="telefono" placeholder="Escribe tu teléfono" aria-describedby="error-telefono">
+              <small id="error-telefono" class="campo-error" role="alert"></small>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="edad">Edad</label>
               <i class="fas fa-birthday-cake"></i>
-              <select name="edad">
+              <select id="edad" name="edad">
                 <option value="">¿Cuál es tu edad?</option>
                 <option value="menor">👶 Menor de 12 años</option>
                 <option value="joven">🧑 Joven (13-25 años)</option>
@@ -484,8 +493,9 @@
           
           <div class="reserva-grid">
             <div class="input-grupo">
+              <label class="campo-label" for="servicio">Servicio que necesitas <span aria-hidden="true">*</span></label>
               <i class="fas fa-stethoscope"></i>
-              <select name="servicio" required>
+              <select id="servicio" name="servicio" aria-describedby="error-servicio" required>
                 <option value="">¿Qué servicio necesitas?</option>
                 <option value="audiometria">🦻 Audiometría (Prueba de audición)</option>
                 <option value="limpieza">🧼 Limpieza de oídos</option>
@@ -493,14 +503,18 @@
                 <option value="moldes">👂 Elaboración de moldes</option>
                 <option value="consulta">💬 Consulta general</option>
               </select>
+              <small id="error-servicio" class="campo-error" role="alert"></small>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="fecha">Fecha de la cita <span aria-hidden="true">*</span></label>
               <i class="fas fa-calendar-alt"></i>
-              <input type="date" name="fecha" required>
+              <input type="date" id="fecha" name="fecha" aria-label="Fecha de la cita" aria-describedby="error-fecha" required>
+              <small id="error-fecha" class="campo-error" role="alert"></small>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="hora">Horario preferido</label>
               <i class="fas fa-clock"></i>
-              <select name="hora">
+              <select id="hora" name="hora">
                 <option value="">Horario preferido</option>
                 <option value="09:00">🕘 09:00 - 10:00</option>
                 <option value="10:00">🕙 10:00 - 11:00</option>
@@ -511,8 +525,9 @@
               </select>
             </div>
             <div class="input-grupo">
+              <label class="campo-label" for="como_nos_conocio">¿Cómo nos conociste?</label>
               <i class="fas fa-globe"></i>
-              <select name="como_nos_conocio">
+              <select id="como_nos_conocio" name="como_nos_conocio">
                 <option value="">¿Cómo nos conociste?</option>
                 <option value="google">🔍 Google / Internet</option>
                 <option value="facebook">📘 Facebook</option>
@@ -527,8 +542,9 @@
         <!-- Mensaje adicional -->
         <div class="paso-card">
           <div class="input-grupo full-width">
+            <label class="campo-label" for="mensaje">Mensaje adicional</label>
             <i class="fas fa-comment-dots"></i>
-            <textarea name="mensaje" rows="3" placeholder="¿Algo más que quieras decirnos? (Ej: Necesito atención especial, problemas de movilidad, etc.)"></textarea>
+            <textarea id="mensaje" name="mensaje" rows="3" placeholder="¿Algo más que quieras decirnos? (Ej: Necesito atención especial, problemas de movilidad, etc.)"></textarea>
           </div>
         </div>
 
@@ -546,6 +562,84 @@
     </div>
   </div>
 </section>
+<script>
+  (function () {
+    const form = document.getElementById('form-reserva');
+    const nombre = form.querySelector('[name="nombre"]');
+    const email = form.querySelector('[name="email"]');
+    const telefono = form.querySelector('[name="telefono"]');
+    const servicio = form.querySelector('[name="servicio"]');
+    const fecha = form.querySelector('[name="fecha"]');
+    let formularioEnviado = false;
+
+    // La fecha mínima se calcula con la hora local para no mostrar un día anterior.
+    const hoy = new Date();
+    const fechaHoy = [hoy.getFullYear(), String(hoy.getMonth() + 1).padStart(2, '0'), String(hoy.getDate()).padStart(2, '0')].join('-');
+    fecha.min = fechaHoy;
+
+    function validarCampo(campo) {
+      campo.setCustomValidity('');
+      const valor = campo.value.trim();
+      const error = document.getElementById('error-' + campo.id);
+      let mensaje = '';
+
+      if (campo === nombre && !valor) {
+        mensaje = 'Debes llenar tu nombre completo.';
+      } else if (campo === nombre && !/^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ]+(?:[ '\-][A-Za-zÁÉÍÓÚáéíóúÜüÑñ]+)*$/.test(valor)) {
+        mensaje = 'El nombre está mal escrito. Usa solo letras y espacios.';
+      } else if (campo === email && !valor) {
+        mensaje = 'Debes llenar tu correo electrónico.';
+      } else if (campo === email && !email.validity.valid) {
+        mensaje = 'El correo está mal escrito. Ejemplo: nombre@correo.com.';
+      } else if (campo === telefono && valor && !/^\+?[0-9 ()-]{7,20}$/.test(valor)) {
+        mensaje = 'El teléfono está mal escrito. Usa solo números.';
+      } else if (campo === servicio && !servicio.value) {
+        mensaje = 'Debes llenar el servicio que necesitas.';
+      } else if (campo === fecha && !fecha.value) {
+        mensaje = 'Debes llenar la fecha de tu cita.';
+      } else if (campo === fecha && fecha.value < fecha.min) {
+        mensaje = 'Selecciona una fecha desde hoy en adelante.';
+      }
+
+      campo.setCustomValidity(mensaje);
+      if (error) {
+        const mostrar = Boolean(mensaje) && (formularioEnviado || valor);
+        error.textContent = mostrar ? mensaje : '';
+        error.hidden = !mostrar;
+      }
+    }
+
+    [nombre, email, telefono, servicio, fecha].forEach(function (campo) {
+      campo.addEventListener('invalid', function () {
+        formularioEnviado = true;
+        validarCampo(campo);
+      });
+      campo.addEventListener('input', function () {
+        validarCampo(campo);
+      });
+      campo.addEventListener('change', function () {
+        validarCampo(campo);
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      formularioEnviado = true;
+      [nombre, email, telefono, servicio, fecha].forEach(validarCampo);
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        form.reportValidity();
+      }
+    });
+
+    form.addEventListener('reset', function () {
+      setTimeout(function () {
+        formularioEnviado = false;
+        [nombre, email, telefono, servicio, fecha].forEach(validarCampo);
+      }, 0);
+    });
+  }());
+</script>
 <style>
     /* ================= RESERVA DE CITAS ================= */
 .reserva-section {
@@ -655,10 +749,34 @@
   position: relative;
 }
 
+.campo-label {
+  display: block;
+  margin: 0 0 8px 4px;
+  color: #800020;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.campo-label span {
+  color: #eb6c05;
+}
+
+.campo-error {
+  display: block;
+  margin: 6px 4px 0;
+  color: #b00020;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.campo-error[hidden] {
+  display: none;
+}
+
 .input-grupo i {
   position: absolute;
   left: 18px;
-  top: 18px;
+  top: 49px;
   color: #eb6c05;
   font-size: 18px;
   z-index: 1;

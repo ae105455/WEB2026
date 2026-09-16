@@ -12,9 +12,17 @@ if ($conn->connect_error) {
 
 $nombre_usuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Usuario';
 $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
+$buscar = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
+$fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : '2000-01-01';
+$fecha_fin = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : date('Y-m-d');
+$buscar_sql = $conn->real_escape_string($buscar);
+$fecha_inicio_sql = $conn->real_escape_string($fecha_inicio);
+$fecha_fin_sql = $conn->real_escape_string($fecha_fin);
 
 $sql = "SELECT id_paciente, cedula, nombre, apellido, telefono, email, fecha_registro 
         FROM pacientes 
+    WHERE fecha_registro BETWEEN '" . $fecha_inicio_sql . "' AND '" . $fecha_fin_sql . "'
+    AND ('" . $buscar_sql . "' = '' OR nombre LIKE '%" . $buscar_sql . "%' OR apellido LIKE '%" . $buscar_sql . "%' OR cedula LIKE '%" . $buscar_sql . "%')
         ORDER BY id_paciente DESC";
 $resultado = $conn->query($sql);
 ?>
@@ -29,7 +37,7 @@ $resultado = $conn->query($sql);
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="./css/sweetalert2.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?v=<?php echo filemtime(__DIR__ . '/css/style.css'); ?>">
 </head>
 <body>
     
@@ -127,6 +135,25 @@ $resultado = $conn->query($sql);
             <div class="page-header">
                 <h3><i class="fas fa-users"></i> LISTA DE PACIENTES</h3>
                 <p>Consulte, edite y gestione los pacientes registrados en el Centro Auditivo AureaMed.</p>
+            </div>
+
+            <div class="container-fluid">
+                <form method="get" class="report-filter-form report-filter-form-wide patients-filter">
+                    <div class="report-filter-field report-search-field">
+                        <label for="buscar">Buscar</label>
+                        <input type="search" id="buscar" name="buscar" value="<?php echo htmlspecialchars($buscar); ?>" placeholder="Paciente, cédula...">
+                    </div>
+                    <div class="report-filter-field">
+                        <label for="fecha_inicio">Desde</label>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio" value="<?php echo htmlspecialchars($fecha_inicio); ?>" required>
+                    </div>
+                    <div class="report-filter-field">
+                        <label for="fecha_fin">Hasta</label>
+                        <input type="date" id="fecha_fin" name="fecha_fin" value="<?php echo htmlspecialchars($fecha_fin); ?>" required>
+                    </div>
+                    <button type="submit" class="btn report-filter-submit"><i class="fas fa-filter"></i> Filtrar</button>
+                    <a href="pacientes.php" class="report-filter-clear" title="Limpiar filtros" aria-label="Limpiar filtros">&times;</a>
+                </form>
             </div>
 
             <div class="container-fluid">

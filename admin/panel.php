@@ -175,6 +175,7 @@ $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
                                 <li><a href="reporte_citas.php"><i class="fas fa-calendar-alt fa-fw"></i> &nbsp; Reporte de Citas</a></li>
                                 <li><a href="reporte_pacientes.php"><i class="fas fa-user-check fa-fw"></i> &nbsp; Pacientes Atendidos</a></li>
                                 <li><a href="reporte_servicios.php"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; Demanda de Servicios</a></li>
+                                <li><a href="REPPDF/index.php"><i class="fas fa-file-pdf fa-fw"></i> &nbsp; Reporte PDF / XLS</a></li>
                             </ul>
                         </li>
 
@@ -196,6 +197,11 @@ $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
                                 <i class="fas fa-hospital-alt fa-fw"></i> &nbsp; Centro Auditivo
                             </a>
                         </li>
+                        <li>
+                            <a href="qr.php">
+                                <i class="fas fa-qrcode fa-fw"></i> &nbsp; Generar códigos QR
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -211,7 +217,9 @@ $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
                         <i class="fas fa-bars"></i>
                     </button>
                     <h3 class="navbar-page-title d-none d-sm-flex">
-                        <i class="fas fa-clinic-medical text-primary"></i> Panel de Control
+                        <a href="panel.php" style="color: inherit; text-decoration: none;">
+                            <i class="fas fa-clinic-medical text-primary"></i> AureaMed | Dashboard Administrativo
+                        </a>
                     </h3>
                 </div>
                 
@@ -235,7 +243,7 @@ $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
                 <div class="dashboard-hero">
                     <div class="dashboard-hero-content">
                         <div class="dashboard-hero-text">
-                            <h1>👋 ¡Bienvenido, <?php echo htmlspecialchars($nombre_usuario); ?>!</h1>
+                            <h1>👋 ¡Bienvenido en  que le podemos  ayudar <?php echo htmlspecialchars($nombre_usuario); ?>!</h1>
                             <p>Gestione eficientemente el flujo clínico de <strong>AureaMed</strong>. Monitoree citas programadas, historiales de pacientes y solicitudes web en tiempo real.</p>
                         </div>
                         <div class="dashboard-hero-actions">

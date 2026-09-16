@@ -31,16 +31,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .aurea2 {
-    display: inline-block;
-    width: 180px;
-    height: 60px;
-    background: url("/WEB2026/aurea--main/docs/ia.png") center/contain no-repeat;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 80px;
     border-radius: 0;
     box-shadow: none;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-indent: -9999px;
     overflow: hidden;
-    margin-left: -18px;
+    margin-left: 0;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.aurea2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
 }
 
 .aurea2:hover {

@@ -8,13 +8,13 @@
 /* 1. VARIABLES DE DISEÑO (DESIGN TOKENS) */
 :root {
     /* Paleta Institucional AureaMed */
-    --brand-darkest: #071527;
-    --brand-navy: #0c2340;
-    --brand-primary: #004b87;
-    --brand-blue: #0066b2;
-    --brand-cyan: #0ea5e9;
-    --brand-gold: #f59e0b;
-    --brand-gold-hover: #d97706;
+    --brand-darkest: #5C1E1E;
+    --brand-navy: #722424;
+    --brand-primary: #8B2C2C;
+    --brand-blue: #A84444;
+    --brand-cyan: #D47777;
+    --brand-gold: #8B2C2C;
+    --brand-gold-hover: #8B2C2C;
 
     /* Semántica de Estados */
     --color-success: #10b981;
@@ -51,7 +51,7 @@
     --white:     #ffffff;
 
     /* Layout & Sombras */
-    --bg-page: #f4f7fb;
+    --bg-page: #ffffff;
     --card-bg: #ffffff;
     --sidebar-width: 280px;
     --navbar-height: 72px;
@@ -66,7 +66,7 @@
     --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
     --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
     --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.08);
-    --shadow-glow: 0 8px 25px rgba(0, 75, 135, 0.18);
+    --shadow-glow: 0 8px 25px rgba(139, 44, 44, 0.18);
     --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -132,7 +132,7 @@ a:hover {
     left: 0;
     height: 100vh;
     z-index: 1000;
-    background: linear-gradient(180deg, #071527 0%, #0c2340 45%, #081d38 100%);
+    background: linear-gradient(180deg, var(--brand-darkest) 0%, var(--brand-navy) 45%, #7A2828 100%);
     box-shadow: 4px 0 25px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
@@ -181,14 +181,14 @@ a:hover {
 .sidebar-brand-icon {
     width: 42px;
     height: 42px;
-    background: linear-gradient(135deg, #0ea5e9 0%, #0066b2 100%);
+    background: linear-gradient(135deg, var(--brand-cyan) 0%, var(--brand-primary) 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     font-size: 20px;
-    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+    box-shadow: 0 4px 14px rgba(139, 44, 44, 0.35);
     flex-shrink: 0;
 }
 
@@ -329,8 +329,8 @@ a:hover {
 
 .nav-lateral-menu ul li a.active {
     color: #ffffff !important;
-    background: linear-gradient(135deg, #0066b2 0%, #004b87 100%) !important;
-    box-shadow: 0 4px 15px rgba(0, 102, 178, 0.35);
+    background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-primary) 100%) !important;
+    box-shadow: 0 4px 15px rgba(139, 44, 44, 0.35);
 }
 
 .nav-lateral-menu ul li a.active i.fa-fw {
@@ -344,7 +344,7 @@ a:hover {
     border-radius: var(--radius-sm);
     padding: 6px 0;
     margin: 4px 0 6px 8px;
-    border-left: 2px solid rgba(14, 165, 233, 0.4);
+    border-left: 2px solid rgba(139, 44, 44, 0.4);
 }
 
 .nav-lateral-menu ul li ul.show-nav-lateral-submenu {
@@ -366,7 +366,7 @@ a:hover {
 
 .nav-lateral-menu ul li ul li a.active {
     color: #ffffff !important;
-    background: rgba(14, 165, 233, 0.2) !important;
+    background: rgba(139, 44, 44, 0.2) !important;
     font-weight: 700;
 }
 
@@ -591,7 +591,7 @@ a:hover {
 
 /* 7. HERO BANNER DE BIENVENIDA */
 .dashboard-hero {
-    background: linear-gradient(135deg, #071527 0%, #004b87 60%, #0066b2 100%);
+    background: linear-gradient(135deg, var(--brand-darkest) 0%, var(--brand-primary) 60%, var(--brand-blue) 100%);
     border-radius: var(--radius-lg);
     padding: 36px 36px 32px;
     color: #ffffff;
@@ -608,7 +608,7 @@ a:hover {
     bottom: -60px;
     width: 280px;
     height: 280px;
-    background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0) 70%);
+    background: radial-gradient(circle, rgba(139, 44, 44, 0.3) 0%, rgba(139, 44, 44, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
 }
@@ -825,6 +825,233 @@ a:hover {
     margin-bottom: 32px;
 }
 
+.report-filter-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin: 0 0 22px;
+    padding: 18px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+.report-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+}
+
+.report-filter-form label {
+    display: block;
+    color: var(--slate-800);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.report-filter-form input {
+    width: 100%;
+    height: 40px;
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: var(--slate-800);
+    background: #ffffff;
+    font-size: 13px;
+    outline: none;
+}
+
+.report-filter-form input:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.report-filter-form button {
+    height: 40px;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.report-filter-form-wide {
+    align-items: flex-end;
+    flex-wrap: nowrap;
+}
+
+.report-filter-form-wide .report-filter-field {
+    flex: 1 1 150px;
+}
+
+.report-filter-form-wide .report-search-field {
+    flex: 1.5 1 230px;
+}
+
+.patients-filter {
+    display: grid;
+    grid-template-columns: minmax(240px, 1.6fr) repeat(2, minmax(150px, 1fr)) auto auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.patients-filter .report-filter-field {
+    min-width: 0;
+}
+
+.report-filter-form-wide select {
+    width: 100%;
+    height: 40px;
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--slate-800);
+}
+
+.report-filter-submit {
+    height: 40px;
+    min-width: 125px;
+    border: 0;
+    border-radius: 8px;
+    background: #b04449;
+    color: #ffffff;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.report-export-button {
+    height: 40px;
+    border-radius: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.report-filter-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 40px;
+    color: #64748b;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.report-filter-clear:hover {
+    color: #b04449;
+    text-decoration: none;
+}
+
+.print-report-header {
+    display: none !important;
+}
+
+@media print {
+    @page { size: A4 landscape; margin: 14mm; }
+
+    html,
+    body {
+        width: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        background: #ffffff !important;
+    }
+    body * { visibility: hidden !important; }
+    .nav-lateral,
+    .navbar-info,
+    .page-header,
+    .report-filter-form,
+    .page-nav-tabs { display: none !important; }
+    .page-content,
+    .main-container { display: block !important; width: 100% !important; min-height: 0 !important; }
+    .print-report-sheet,
+    .print-report-sheet * { visibility: visible !important; }
+    .print-report-sheet {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        background: #ffffff;
+    }
+    .print-report-header {
+        display: flex !important;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid #9ca3af;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+    .print-report-header img {
+        display: block !important;
+        width: 92px !important;
+        min-width: 92px !important;
+        max-width: 92px !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        max-height: 48px !important;
+        object-fit: contain !important;
+        object-position: center center;
+        background: #ffffff;
+    }
+    .print-report-header h1 {
+        margin: 0 0 5px;
+        color: #111827;
+        font-size: 20px;
+        font-weight: 800;
+    }
+    .print-report-header p {
+        margin: 0 0 8px;
+        color: #4b5563;
+        font-size: 12px;
+    }
+    .print-report-header strong {
+        color: #111827;
+        font-size: 12px;
+    }
+    .print-report-sheet .table-container-header {
+        display: none;
+    }
+    .print-report-sheet .table-container-title {
+        color: #111827;
+        font-size: 15px;
+    }
+    .print-report-sheet table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+    }
+    .print-report-sheet th,
+    .print-report-sheet td {
+        border: 1px solid #9ca3af;
+        padding: 7px 8px;
+    }
+    .print-report-sheet th {
+        background: #e5e7eb !important;
+        color: #111827;
+    }
+    .print-report-sheet .badge {
+        border: 0;
+        background: transparent !important;
+        color: #111827 !important;
+        padding: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .report-filter-form { align-items: stretch; flex-direction: column; }
+    .report-filter-form-wide { flex-wrap: wrap; }
+    .patients-filter { display: flex; }
+    .report-filter-field { min-width: 0; }
+    .report-filter-form button { width: 100%; }
+}
+
 .shortcut-card {
     background: var(--white);
     border: 1px solid var(--slate-200);
@@ -944,7 +1171,7 @@ a:hover {
     background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-primary) 100%) !important;
     color: #ffffff !important;
     border-color: transparent !important;
-    box-shadow: 0 4px 14px rgba(0, 75, 135, 0.25);
+    box-shadow: 0 4px 14px rgba(139, 44, 44, 0.25);
 }
 
 /* 12. TABLAS MODERNAS (TABLE CONTAINER) */
@@ -1233,8 +1460,8 @@ textarea.form-control {
 }
 
 .form-control:focus {
-    border-color: var(--brand-blue);
-    box-shadow: 0 0 0 4px rgba(0, 102, 178, 0.12);
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 4px rgba(139, 44, 44, 0.12);
     outline: none;
 }
 

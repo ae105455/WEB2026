@@ -12,12 +12,18 @@ if ($conn->connect_error) {
 
 $nombre_usuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Usuario';
 $rol_usuario = isset($_SESSION['rol']) ? ucfirst($_SESSION['rol']) : 'Personal';
+$fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : date('Y-m-01');
+$fecha_fin = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : date('Y-m-d');
+$buscar = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
+$buscar_sql = $conn->real_escape_string($buscar);
 
 $sql = "SELECT p.id_paciente, p.cedula, p.nombre, p.apellido, p.email, p.telefono, p.fecha_registro, 
         COUNT(r.id_reserva) as total_reservas,
         SUM(CASE WHEN r.estado IN ('completada', 'atendida') THEN 1 ELSE 0 END) as total_atendidas
         FROM pacientes p
         LEFT JOIN reservas r ON p.id_paciente = r.id_paciente
+        WHERE p.fecha_registro BETWEEN '" . $conn->real_escape_string($fecha_inicio) . "' AND '" . $conn->real_escape_string($fecha_fin) . "'
+        AND ('" . $buscar_sql . "' = '' OR CONCAT(p.nombre, ' ', p.apellido) LIKE '%" . $buscar_sql . "%' OR p.cedula LIKE '%" . $buscar_sql . "%')
         GROUP BY p.id_paciente
         ORDER BY total_reservas DESC, p.nombre ASC";
 $resultado = $conn->query($sql);
@@ -134,6 +140,19 @@ $resultado = $conn->query($sql);
             </div>
 
             <div class="container-fluid">
+                <form method="get" class="report-filter-form report-filter-form-wide">
+                    <div class="report-filter-field report-search-field"><label for="buscar">Buscar</label><input type="search" id="buscar" name="buscar" value="<?php echo htmlspecialchars($buscar); ?>" placeholder="Paciente o cédula..."></div>
+                    <div class="report-filter-field"><label for="metodo">Método</label><select id="metodo" name="metodo"><option value="todos">Todos</option></select></div>
+                    <div class="report-filter-field"><label for="fecha_inicio">Desde</label><input type="date" id="fecha_inicio" name="fecha_inicio" value="<?php echo htmlspecialchars($fecha_inicio); ?>" required></div>
+                    <div class="report-filter-field"><label for="fecha_fin">Hasta</label><input type="date" id="fecha_fin" name="fecha_fin" value="<?php echo htmlspecialchars($fecha_fin); ?>" required></div>
+                    <button type="submit" class="btn report-filter-submit"><i class="fas fa-filter"></i> Filtrar</button>
+                    <button type="button" class="btn btn-primary report-export-button" onclick="window.print();"><i class="fas fa-file-pdf"></i> Generar PDF</button>
+                    <button type="button" class="btn btn-success report-export-button" onclick="exportarTablaXLS('tabla-reporte-pacientes', 'reporte-pacientes');"><i class="fas fa-file-excel"></i> Exportar a XLS</button>
+                    <a href="reporte_pacientes.php" class="report-filter-clear" title="Limpiar filtros" aria-label="Limpiar filtros">&times;</a>
+                </form>
+            </div>
+
+            <div class="container-fluid">
                 <ul class="page-nav-tabs">
                     <li><a href="reporte_citas.php"><i class="fas fa-calendar-alt"></i> REPORTE DE CITAS</a></li>
                     <li><a class="active" href="reporte_pacientes.php"><i class="fas fa-user-check"></i> PACIENTES ATENDIDOS</a></li>
@@ -142,15 +161,16 @@ $resultado = $conn->query($sql);
             </div>
             
             <div class="container-fluid">
-                <div class="table-container">
+                <div class="table-container print-report-sheet">
+                    <div class="print-report-header">
+                        <img src="./aurea.jpg" alt="Logo AureaMed">
+                        <div><h1>AureaMed | Reporte de Pacientes</h1><p>Historial de pacientes registrados en el sistema.</p><strong>Rango consultado: <?php echo date('d/m/Y', strtotime($fecha_inicio)); ?> al <?php echo date('d/m/Y', strtotime($fecha_fin)); ?></strong></div>
+                    </div>
                     <div class="table-container-header">
                         <h5 class="table-container-title"><i class="fas fa-users text-primary"></i> Frecuencia de Pacientes</h5>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="window.print();">
-                            <i class="fas fa-print"></i> Imprimir Reporte
-                        </button>
                     </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table id="tabla-reporte-pacientes" class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -194,6 +214,7 @@ $resultado = $conn->query($sql);
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/reportes.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
