@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+vendor/
+
+# Configuración sensible
+.env
+config.php
+*.env
+
+# Logs
+*.log
+logs/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Temporales
+*.cache
+*.tmp
+
+
+
+
